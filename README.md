@@ -1,7 +1,7 @@
 # Stock Price Prediction Using Sentiment Analysis and Machine Learning
 
 ## Description
-This project predicts stock prices using historical data and sentiment analysis. It utilizes financial data from Yahoo Finance and analyzes social sentiment (simulated here but extendable with real data from platforms like Twitter). The prediction model employs linear regression.
+This project predicts stock prices using historical data and sentiment analysis. The financial data is fetched from Yahoo Finance, and sentiment analysis is performed on simulated social media data (you can extend this with real Twitter data). The prediction model is built using Linear Regression.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -14,61 +14,55 @@ This project predicts stock prices using historical data and sentiment analysis.
 - [Contact](#contact)
 
 ## Installation
+Follow these steps to get your development environment set up:
+
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/Monisha125/AI-Social-Sentiment-Stock-Predictor/tree/main
    ```
+
 2. Navigate to the project directory:
    ```bash
-   cd your-repo
+   cd AI-Social-Sentiment-Stock-Predictor
    ```
-3. Install the required dependencies:
+
+3. Install the required dependencies using `pip`:
    ```bash
    pip install -r requirements.txt
    ```
-   The dependencies include:
-   - pandas
-   - yfinance
-   - textblob
-   - numpy
-   - scikit-learn
 
 ## Usage
-To run the project, use:
-```python
-python your_script_name.py
-```
-### Example
-```python
-symbol = 'AAPL'
-start_date = '2023-01-01'
-end_date = '2023-12-31'
-predict_stock_price(symbol, start_date, end_date)
-```
-The program will print the Mean Squared Error (MSE) and the predicted stock price for the next day.
+1. Start the Flask server by running the following command:
+   ```bash
+   python app.py
+   ```
+
+2. Open your browser and navigate to `http://localhost:5000`.
+
+3. Use the web form to enter the stock symbol, start date, and end date. Click "Predict" to receive a predicted stock price for the next day.
 
 ## Features
-- **Stock Data Retrieval**: Fetches historical stock prices from Yahoo Finance.
-- **Sentiment Analysis**: Analyzes sentiment using TextBlob (simulated data provided).
-- **Machine Learning Model**: Uses linear regression for stock price prediction.
-- **Performance Evaluation**: Calculates the Mean Squared Error of the model.
+- Fetches historical stock data using the Yahoo Finance API (`yfinance`).
+- Performs sentiment analysis using TextBlob (simulated social media data for now).
+- Predicts future stock prices using a simple Linear Regression model.
 
 ## Data Sources
-- **Stock Data**: Retrieved using the `yfinance` package.
-- **Sentiment Data**: Simulated data, but can be replaced with real data from a social media API like Twitter.
+- **Stock Data**: Yahoo Finance (via `yfinance` library).
+- **Sentiment Data**: Simulated positive sentiment (you can extend this with real social media data like Twitter).
 
 ## Model
-- **Algorithm**: Linear Regression
-- **Libraries Used**: 
-  - `pandas` for data manipulation
-  - `yfinance` for fetching stock data
-  - `TextBlob` for sentiment analysis
-  - `scikit-learn` for model training and evaluation
+- **Algorithm**: Linear Regression.
+- **Libraries**: 
+  - `Flask` for the web application.
+  - `pandas` for data handling.
+  - `yfinance` for fetching stock data.
+  - `TextBlob` for sentiment analysis.
+  - `scikit-learn` for building and evaluating the regression model.
 
 ## Contributing
-Contributions are welcome! Please follow these steps:
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-name`)
-3. Commit your changes (`git commit -m 'Add a feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Open a Pull Request
+We welcome contributions to improve this project! To contribute:
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add a feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a Pull Request.
