@@ -1,3 +1,4 @@
+from flask import Flask, request, jsonify
 import pandas as pd
 import yfinance as yf
 from textblob import TextBlob
@@ -6,6 +7,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import datetime as dt
+
+app = Flask(__name__)
 
 def get_stock_data(symbol, start_date, end_date):
     stock_data = yf.download(symbol, start=start_date, end=end_date)
@@ -23,7 +26,7 @@ def get_social_sentiment_data():
     })
     sentiment_data['sentiment'] = sentiment_data['text'].apply(calculate_sentiment)
     return sentiment_data
-  
+
 def prepare_data(symbol, start_date, end_date):
     stock_data = get_stock_data(symbol, start_date, end_date)
     sentiment_data = get_social_sentiment_data()
@@ -47,13 +50,20 @@ def train_model(features, labels):
     print("Mean Squared Error:", mse)
     return model
 
-def predict_stock_price(symbol, start_date, end_date):
+@app.route('/predict', methods=['POST'])
+def predict_stock_price():
+    data = request.get_json()
+    symbol = data['symbol']
+    start_date = data['startDate']
+    end_date = data['endDate']
+
     features, labels = prepare_data(symbol, start_date, end_date)
     model = train_model(features, labels)
     prediction = model.predict([features.iloc[-1]])  # Predict using the latest data
-    print("Predicted stock price for the next day:", prediction[0])
 
-symbol = 'AAPL'
-start_date = '2023-01-01'
-end_date = '2023-12-31'
-predict_stock_price(symbol, start_date, end_date)
+    return jsonify({
+        'prediction': round(prediction[0], 2)
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)
